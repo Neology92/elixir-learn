@@ -6,6 +6,9 @@ defmodule Discuss.Application do
   use Application
 
   def start(_type, _args) do
+    Envy.load([".env"])
+    Envy.reload_config()
+
     children = [
       # Start the Ecto repository
       Discuss.Repo,
