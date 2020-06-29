@@ -38,6 +38,16 @@ defmodule Discuss.Forums do
   def get_topic!(id), do: Repo.get!(Topic, id)
 
   @doc """
+  Gets a single topic with comments.
+
+  Raises `Ecto.NoResultsError` if the Topic does not exist.
+  """
+  def get_topic_with_comments!(id) do
+    Repo.get!(Topic, id)
+    |> Repo.preload(:comments)
+  end
+
+  @doc """
   Creates a topic.
 
   ## Examples
@@ -146,8 +156,9 @@ defmodule Discuss.Forums do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_comment(attrs \\ %{}) do
-    %Comment{}
+  def create_comment(attrs \\ %{}, topic) do
+    topic
+    |> Ecto.build_assoc(:comments)
     |> Comment.changeset(attrs)
     |> Repo.insert()
   end

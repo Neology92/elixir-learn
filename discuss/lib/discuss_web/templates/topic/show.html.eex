@@ -1,12 +1,19 @@
-<ul>
-  <li>
-    <h4>
-      <%= @topic.title %>
-    </h4>
-  </li>
+<header class="topic-header">
+  <h4 class="topic-title">
+    <%= @topic.title %>
+  </h4>
+  <div class="right">
+    <span><%= link "Edit", to: Routes.topic_path(@conn, :edit, @topic), class: "btn blue lighten-1 waves-effect waves-light" %></span>
+    <span><%= link "Back", to: Routes.topic_path(@conn, :index), class: "btn blue lighten-1 waves-effect waves-light" %></span>
+  </div>
+</header>
+<div class="addcomment-block">
+  <label id="input-label" >Comment</label>
+  <textarea class="materialize-textarea" placeholder="Aaa" aria-labelledby="input-label"></textarea>
+  <button class="btn">Add</button>
+</div>
+<ul class="collection">
 </ul>
-<span><%= link "Edit", to: Routes.topic_path(@conn, :edit, @topic) %></span>
-<span><%= link "Back", to: Routes.topic_path(@conn, :index) %></span>
 <script>
   document.addEventListener("DOMContentLoaded", function() {
     window.createSocket(<%= @topic.id %>)

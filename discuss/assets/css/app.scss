@@ -1,6 +1,10 @@
 /* This file is for your main application css. */
 @import './phoenix.css';
 
+a:hover.btn {
+	color: white;
+}
+
 /* Alerts and form errors */
 .alert {
 	padding: 15px;
@@ -38,4 +42,18 @@
 .invalid-feedback {
 	color: red;
 	text-transform: capitalize;
+}
+
+.topic-title {
+	padding: 20px 0;
+}
+.topic-header {
+	margin-bottom: 30px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.addcomment-block {
+	margin-bottom: 70px;
 }
