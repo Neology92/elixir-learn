@@ -4,10 +4,6 @@ defmodule DiscussWeb.AuthController do
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
     user_params = %{token: auth.credentials.token, email: auth.info.email, provider: "github"}
-
-    IO.puts("==================================")
-    IO.inspect(user_params)
-
     signin(conn, user_params)
   end
 
