@@ -44,7 +44,7 @@ defmodule Discuss.Forums do
   """
   def get_topic_with_comments!(id) do
     Repo.get!(Topic, id)
-    |> Repo.preload(:comments)
+    |> Repo.preload(comments: [:user])
   end
 
   @doc """

@@ -25,7 +25,7 @@ const createSocket = (topicId) => {
 
 const renderComments = (comments) => {
 	const renderedComments = comments.map((comment) =>
-		commentTemplate(comment.content)
+		commentTemplate(comment)
 	);
 
 	document.querySelector('.collection').innerHTML = renderedComments.join(
@@ -38,11 +38,14 @@ const renderComment = (e) => {
 	document.querySelector('.collection').innerHTML += renderedComment;
 };
 
-const commentTemplate = (content) => `
+const commentTemplate = ({ content, user: { email } }) => `
 	<li class="collection-item">
 		<span>
 			${content}
 		</span>
+		<div class="secondary-content">
+			${email}	
+		</div>
 	</li>
 `;
 

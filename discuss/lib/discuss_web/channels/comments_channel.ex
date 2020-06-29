@@ -20,7 +20,7 @@ defmodule DiscussWeb.CommentsChannel do
     case Discuss.Forums.create_comment(%{content: content}, topic, user_id) do
       {:ok, comment} ->
         Channel.broadcast!(socket, "comments:#{socket.assigns.topic.id}:new", %{
-          comment: comment.content
+          comment: comment
         })
 
         {:reply, :ok, socket}
