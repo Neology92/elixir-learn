@@ -1,5 +1,6 @@
 defmodule DiscussWeb.CommentsChannel do
   use DiscussWeb, :channel
+  alias Phoenix.Channel
 
   @impl true
   def join("comments:" <> topic_id, _params, socket) do
@@ -14,11 +15,12 @@ defmodule DiscussWeb.CommentsChannel do
 
   @impl true
   def handle_in(_name, %{"content" => content}, socket) do
-    IO.puts("=k==============================")
-    IO.inspect(socket.assigns.topic)
-
     case Discuss.Forums.create_comment(%{content: content}, socket.assigns.topic) do
-      {:ok, _comment} ->
+      {:ok, comment} ->
+        Channel.broadcast!(socket, "comments:#{socket.assigns.topic.id}:new", %{
+          comment: comment.content
+        })
+
         {:reply, :ok, socket}
 
       {:error, changeset} ->
