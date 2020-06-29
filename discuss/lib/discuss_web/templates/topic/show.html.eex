@@ -7,3 +7,8 @@
 </ul>
 <span><%= link "Edit", to: Routes.topic_path(@conn, :edit, @topic) %></span>
 <span><%= link "Back", to: Routes.topic_path(@conn, :index) %></span>
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    window.createSocket(<%= @topic.id %>)
+  })
+</script>
