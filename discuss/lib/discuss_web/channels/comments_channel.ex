@@ -15,7 +15,9 @@ defmodule DiscussWeb.CommentsChannel do
 
   @impl true
   def handle_in(_name, %{"content" => content}, socket) do
-    case Discuss.Forums.create_comment(%{content: content}, socket.assigns.topic) do
+    %{assigns: %{topic: topic, user_id: user_id}} = socket
+
+    case Discuss.Forums.create_comment(%{content: content}, topic, user_id) do
       {:ok, comment} ->
         Channel.broadcast!(socket, "comments:#{socket.assigns.topic.id}:new", %{
           comment: comment.content

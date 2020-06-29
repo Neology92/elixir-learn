@@ -156,9 +156,9 @@ defmodule Discuss.Forums do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_comment(attrs \\ %{}, topic) do
+  def create_comment(attrs \\ %{}, topic, user_id) do
     topic
-    |> Ecto.build_assoc(:comments)
+    |> Ecto.build_assoc(:comments, user_id: user_id)
     |> Comment.changeset(attrs)
     |> Repo.insert()
   end
