@@ -34,4 +34,4 @@ npm-debug.log
 /priv/static/
 
 # There are stored secets
-/config/.env.exs
+.env
